@@ -39,10 +39,11 @@
 <script>
   "use strict";
   // code here for above-problem
-  var button = document.getElementById('change-hello-to-goodbye-button');
+
+  var changeButton = document.getElementById('change-hello-to-goodbye-button');
   var message = document.getElementById('message-to-change');
 
-  button.onclick = function() {
+  changeButton.onclick = function() {
     message.innerHTML = "goodbye";
   }
 
@@ -74,6 +75,17 @@
 <script>
   "use strict";
   // code here for above problem
+
+  var alertButton = document.getElementById('prevent-form-submission-form');
+  var favColor = document.getElementById('favorite-color-field');
+
+  function preventSubmit(evt) {
+    alert('Your favorite color is ' + favColor.value + '.');
+    evt.preventDefault();
+  }
+
+  alertButton.addEventListener('submit', preventSubmit);
+
 </script>
 
 <div class="hint">
