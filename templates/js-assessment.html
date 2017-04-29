@@ -148,25 +148,27 @@ the text box so the alert box text would make sense in context. -->
   // code here for above problem
   // if user enters 5, result will be 1 + 2 + 3 + 4 + 5 = 15
 
+
   // THIS ISN'T WORKING RIGHT NOW, GOING TO MOVE ON & COME BACK TO IT
 
-  var sumSubmitButton = document.getElementById('sum-to-n-submission-button');
-  var sumNums = document.getElementById('sum-to-n-result').innerHTML
 
-  function sumNumbers(n) {
-    var sum = 0;
+  // var sumSubmitButton = document.getElementById('sum-to-n-submission-button');
+  // var sumNums = document.getElementById('sum-to-n-result').innerHTML
 
-    for (var i = 1; i <= n; i++){
-      sum += i;
-    }
-    return sum
-  }
+  // function sumNumbers(n) {
+  //   var sum = 0;
 
-  sumSubmitButton.onclick = function() {
-    sumNums.innerHTML = sumNumbers;
-  }
+  //   for (var i = 1; i <= n; i++){
+  //     sum += i;
+  //   }
+  //   return sum
+  // }
 
-  sumSubmitButton.addEventListener('click', sumNumbers);
+  // sumSubmitButton.onclick = function() {
+  //   sumNums.innerHTML = sumNumbers;
+  // }
+
+  // sumSubmitButton.addEventListener('click', sumNumbers);
 
 </script>
 
@@ -236,6 +238,66 @@ $('#kittenz-rule').dblclick(function() {
 <script>
   "use strict";
   // put your code here
+
+  // Putting some variables here to use later on
+  var numberGuessingMsg = $('#number-guessing-msg');
+  var playButton = $('#play-guessing-game');
+  var guessButton = $('#try-this-number');
+  // Was trying to empty the number input box for a new round, not sure how to 
+  // implement but need to move on for now
+  var numberBox = $('#number-guessed');
+
+
+  function beginGame() {
+    // This sets all the things to what they need to be upon initialzing game
+    numberGuessingMsg.html('Guess a number between 1 & 100.')
+    playButton.attr('disabled', true);
+    guessButton.attr('disabled', false);
+    $('#number-guessed').attr('disabled', false);
+
+    // Now we get the number to guess
+    var gameNumber = Math.floor((Math.random() * (100 - 1) + 1));
+
+    //  Prevents redirect & starts up game with function below this one
+    guessButton.click(function(evt) {
+      evt.preventDefault();
+      guessingGame(gameNumber);
+    })
+  }
+
+  // Man, putting {}'s and ()'s in the right places is a pain...
+
+
+  function guessingGame(gameNumber) {
+    // Returns the player's guess
+    var playerGuess = $('#number-guessed').val();
+
+    // And now the long part;
+
+    if (playerGuess <= 100 && playerGuess >= 1) {
+      // Using == instead of === to check if "equal-ish"
+      if (playerGuess == gameNumber) {
+        // Msg displayed, sets all the things back
+        numberGuessingMsg.html('Awesomesauce, you guessed it! (Click "Play" to play again.)')
+        playButton.attr('disabled', false);
+        guessButton.attr('disabled', true);
+        $('#number-guessed').attr('disabled', true);
+      // Too high, keep going
+      } else if (playerGuess > gameNumber) {
+        numberGuessingMsg.html('Guess lower.');
+      // Too low, keep going
+      } else if (playerGuess < gameNumber) {
+        numberGuessingMsg.html('Guess higher.');
+      }
+    // Accounts for a number out of range
+    } else {
+      numberGuessingMsg.html('Your input needs to be a number between 1 & 100--try again.')
+    }
+  }
+
+  // Make this game happen!
+  $('#play-guessing-game').on('click', beginGame);
+
 </script>
 
 
