@@ -148,6 +148,26 @@ the text box so the alert box text would make sense in context. -->
   // code here for above problem
   // if user enters 5, result will be 1 + 2 + 3 + 4 + 5 = 15
 
+  // THIS ISN'T WORKING RIGHT NOW, GOING TO MOVE ON & COME BACK TO IT
+
+  var sumSubmitButton = document.getElementById('sum-to-n-submission-button');
+  var sumNums = document.getElementById('sum-to-n-result').innerHTML
+
+  function sumNumbers(n) {
+    var sum = 0;
+
+    for (var i = 1; i <= n; i++){
+      sum += i;
+    }
+    return sum
+  }
+
+  sumSubmitButton.onclick = function() {
+    sumNums.innerHTML = sumNumbers;
+  }
+
+  sumSubmitButton.addEventListener('click', sumNumbers);
+
 </script>
 
 
@@ -176,9 +196,15 @@ the text box so the alert box text would make sense in context. -->
        alt="Adorbz" id="kittenz-rule">
 </fieldset>
 
+<script src="https://code.jquery.com/jquery.js"></script>
 <script>
   "use strict";
   // put your code here
+
+$('#kittenz-rule').dblclick(function() {
+  $('#kittenz-rule').attr('src', 'https://lh3.googleusercontent.com/-6Lx0FdHaJ2I/V5RbR_S9kkI/AAAAAAAAAy8/HaefYYW-LqsBUM8cHkf0_7aR2NZSVCcPA/w506-h750/klee_kai_head_tilt.jpg')
+});
+
 </script>
 
 <div class="hint">
