@@ -150,25 +150,36 @@ the text box so the alert box text would make sense in context. -->
 
 
   // THIS ISN'T WORKING RIGHT NOW, GOING TO MOVE ON & COME BACK TO IT
+  // Need to figure out right order of things and not have page redirect
 
+  // 5:26 pm 4/29
+  // Came back to it, making progress but still not there
+  // At least it's not redirecting now
 
-  // var sumSubmitButton = document.getElementById('sum-to-n-submission-button');
-  // var sumNums = document.getElementById('sum-to-n-result').innerHTML
+  var sumSubmitButton = document.getElementById('sum-to-n-submission-button');
+  var numberInput = document.getElementById('sum-to-n-field');
+  var sumResult = document.getElementById('sum-to-n-result');
 
-  // function sumNumbers(n) {
-  //   var sum = 0;
+  // Function to get the sum of numbers 1 thru n
+  function sumNumbers(n) {
+    var sum = 0;
 
-  //   for (var i = 1; i <= n; i++){
-  //     sum += i;
-  //   }
-  //   return sum
-  // }
+    for (var i = 1; i <= n; i++){
+      sum += i;
+    }
+    return sum
+  }
 
-  // sumSubmitButton.onclick = function() {
-  //   sumNums.innerHTML = sumNumbers;
-  // }
+  function displaySum(evt) {
+    evt.preventDefault();
 
-  // sumSubmitButton.addEventListener('click', sumNumbers);
+    // Herein lies the problem (I think)
+    // Currently outputting sum as 0, no bueno
+    // Why not return value?
+    sumResult.innerHTML = sumNumbers(numberInput);
+  }
+
+  sumSubmitButton.addEventListener('click', displaySum);
 
 </script>
 
@@ -243,9 +254,10 @@ $('#kittenz-rule').dblclick(function() {
   var numberGuessingMsg = $('#number-guessing-msg');
   var playButton = $('#play-guessing-game');
   var guessButton = $('#try-this-number');
+
   // Was trying to empty the number input box for a new round, not sure how to 
   // implement but need to move on for now
-  var numberBox = $('#number-guessed');
+  // var numberBox = $('#number-guessed');
 
 
   function beginGame() {
@@ -270,6 +282,7 @@ $('#kittenz-rule').dblclick(function() {
 
   function guessingGame(gameNumber) {
     // Returns the player's guess
+    // The val() method returns or sets the value attribute of the selected elements
     var playerGuess = $('#number-guessed').val();
 
     // And now the long part;
@@ -364,6 +377,25 @@ $('#kittenz-rule').dblclick(function() {
   }
 
   // put your code here
+
+  function giveTRexTarget(evt) {
+    // Prevent redirect
+    evt.preventDefault();
+    // Value for the attack target
+    var formInput = {
+      "attack-target": $('#t-rex-target').val()
+    };
+    // POST makes more sense b/c there are side effects
+    // Inititates the "attack" & shows outcome
+    $.post("/t-rex-attack.json",
+           formInput,
+           showTRexResults
+           );
+  }
+
+  // Wreak havoc
+  $('#t-rex-form').on('submit', giveTRexTarget);
+
 
 </script>
 
