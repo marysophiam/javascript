@@ -66,7 +66,9 @@
 </p>
 
 <!-- I know we aren't supposed to change the HTML, but I added text before
-the text box so the alert box text would make sense in context. -->
+the text box so the alert box text would make sense in context, as it's not 
+obvious to a user who doesn't know what's in the code what they're supposed to 
+enter in the text box. Doesn't affect functionality/operation whatsoever. -->
 <fieldset>
   <form action="some-script" id="prevent-form-submission-form">
     Favorite color: 
@@ -152,12 +154,21 @@ the text box so the alert box text would make sense in context. -->
   // THIS ISN'T WORKING RIGHT NOW, GOING TO MOVE ON & COME BACK TO IT
   // Need to figure out right order of things and not have page redirect
 
-  // 5:26 pm 4/29
+  // 5:26pm 4/29
   // Came back to it, making progress but still not there
   // At least it's not redirecting now
 
+  // 7:52pm 4/30
+  // Went to the gym earlier and promptly fell asleep after eating lunch
+  // following that. Was nice to actually not stare at my laptop all day.
+  // Will come back and tinker with this more, but I'm gonna go ahead and submit 
+  // my link...I know I'm close, I just need to figure out why 0 is being 
+  // displayed instead of correct sum (need to assign a variable properly?
+  // indentation issue?)
+
+
   var sumSubmitButton = document.getElementById('sum-to-n-submission-button');
-  var numberInput = document.getElementById('sum-to-n-field');
+  var numberField = document.getElementById('sum-to-n-field');
   var sumResult = document.getElementById('sum-to-n-result');
 
   // Function to get the sum of numbers 1 thru n
@@ -170,13 +181,14 @@ the text box so the alert box text would make sense in context. -->
     return sum
   }
 
+
   function displaySum(evt) {
     evt.preventDefault();
 
     // Herein lies the problem (I think)
     // Currently outputting sum as 0, no bueno
     // Why not return value?
-    sumResult.innerHTML = sumNumbers(numberInput);
+    sumResult.innerHTML = sumNumbers(numberField);
   }
 
   sumSubmitButton.addEventListener('click', displaySum);
@@ -308,7 +320,7 @@ $('#kittenz-rule').dblclick(function() {
     }
   }
 
-  // Make this game happen!
+  // Make this game happen
   $('#play-guessing-game').on('click', beginGame);
 
 </script>
